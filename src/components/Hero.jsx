@@ -45,6 +45,7 @@ const Hero = () => {
               <motion.span
                 key={index}
                 whileHover={{ scale: 1.2, y: -2 }}
+                whileTap={{ scale: 1.2, y: -2 }}
                 className="inline-block"
               >
                 {char === " " ? "\u00A0" : char}
@@ -58,6 +59,7 @@ const Hero = () => {
               <motion.span
                 key={index}
                 whileHover={{ scale: 1.3, color: "#FF6B00" }}
+                whileTap={{ scale: 1.3, color: "#FF6B00" }}
                 transition={{ type: "spring", stiffness: 300 }}
                 className="inline-block hover:z-10 relative"
               >
@@ -66,13 +68,14 @@ const Hero = () => {
             ))}
             <br />
             {/* Split "Sahil Bhagat" into characters with gradient */}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 dark:from-white dark:via-slate-200 dark:to-slate-400">
+            <span className="text-slate-900 dark:text-white">
               {"Sahil Bhagat".split("").map((char, index) => (
                 <motion.span
                   key={index}
-                  whileHover={{ scale: 1.3, rotate: index % 2 === 0 ? 10 : -10 }}
+                  whileHover={{ scale: 1.3, rotate: index % 2 === 0 ? 10 : -10, color: "#FF6B00" }}
+                  whileTap={{ scale: 1.3, rotate: index % 2 === 0 ? 10 : -10, color: "#FF6B00" }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="inline-block hover:text-primary transition-colors duration-200"
+                  className="inline-block relative z-10"
                 >
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
@@ -82,13 +85,13 @@ const Hero = () => {
           
           <p className="text-xl text-slate-500 dark:text-slate-400 mb-12 leading-relaxed max-w-md font-medium cursor-default">
             {"From Idea to deployment — I design and build ".split("").map((char, index) => (
-              <motion.span key={index} whileHover={{ color: "#FF6B00" }} className="inline-block transition-colors duration-150">
+              <motion.span key={index} whileHover={{ color: "#FF6B00" }} whileTap={{ color: "#FF6B00" }} className="inline-block transition-colors duration-150">
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
             <span className="text-secondary dark:text-secondary-lighter">
               {"full-stack web applications".split("").map((char, index) => (
-                <motion.span key={index} whileHover={{ scale: 1.1, color: "#FF6B00" }} className="inline-block transition-all duration-150">
+                <motion.span key={index} whileHover={{ scale: 1.1, color: "#FF6B00" }} whileTap={{ scale: 1.1, color: "#FF6B00" }} className="inline-block transition-all duration-150">
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
               ))}
@@ -178,19 +181,33 @@ const Hero = () => {
           
           {/* Main Profile Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, x: 150, scale: 0.5 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
             className="relative z-10 w-full max-w-[500px]"
           >
-            <div className="relative overflow-hidden rounded-[3rem] shadow-2xl group">
-              <img 
+            <motion.div 
+              whileHover="hover"
+              whileTap="hover"
+              className="relative overflow-hidden rounded-[3rem] shadow-2xl cursor-pointer"
+            >
+              <motion.img 
                 src={profilePic} 
                 alt="Sahil Bhagat" 
-                className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-1000"
+                variants={{
+                  hover: { scale: 1.05 }
+                }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
+              <motion.div 
+                variants={{
+                  hover: { opacity: 1 }
+                }}
+                className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 pointer-events-none"
+              ></motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Floating Badge 1: Full Stack Developer */}
