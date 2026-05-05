@@ -146,7 +146,7 @@ const Hero = () => {
         </div>
 
         {/* Right Image Area */}
-        <div className="relative flex justify-center items-center">
+        <div className="relative flex justify-center items-center mt-20 lg:mt-0">
           
           {/* Design elements behind the pic */}
           <div className="absolute inset-0 flex justify-center items-center -z-10">
@@ -181,10 +181,24 @@ const Hero = () => {
           
           {/* Main Profile Image */}
           <motion.div
-            initial={{ opacity: 0, x: 150, scale: 0.5 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.6 }}
+            variants={{
+              hidden: { 
+                opacity: 0, 
+                x: 80, 
+                scale: 0.9,
+                transition: { duration: 0.2, ease: "easeIn" } 
+              },
+              visible: { 
+                opacity: 1, 
+                x: 0, 
+                scale: 1,
+                transition: { type: "tween", duration: 0.6, ease: "easeOut" } 
+              }
+            }}
+            style={{ willChange: "transform, opacity" }}
             className="relative z-10 w-full max-w-[500px]"
           >
             <motion.div 
