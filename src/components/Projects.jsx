@@ -12,17 +12,17 @@ const Projects = () => {
       subtitle: "Lost & Found Platform",
       description: "A full-stack MERN application for reporting and tracking lost items. Features real-time matching and secure user authentication.",
       tech: ["React", "Node.js", "MongoDB", "Tailwind"],
-      github: "https://github.com/SAHILSK017/BackTrace",
+      github: "https://github.com/SAHILSK017/Backtrace",
       demo: "https://backtracesk.vercel.app/",
       image: backtraceImg
     },
- 
+
     {
       title: "AVATANI",
       subtitle: "Instant Service Platform",
       description: "Avatani is an on-demand service booking platform that connects users with nearby service providers, enabling fast, reliable, and real-time booking and service fulfillment..",
       tech: ["MERN Stack", "JWT", "Express"],
-      github: "https://github.com/SAHILSK017/Awatani--a-service-booking-app-",
+      github: "https://github.com/SAHILSK017/Awatani-a-service-booking-app-",
       demo: "https://awatani.vercel.app/login",
       image: avataniImg
     },
@@ -88,7 +88,7 @@ const Projects = () => {
 
               {/* Project Details */}
               <div className="w-full lg:w-2/5 flex flex-col justify-center">
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: idx % 2 === 0 ? 30 : -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -103,8 +103,8 @@ const Projects = () => {
                   </p>
                   <div className="flex flex-wrap gap-3 mb-8">
                     {project.tech.map((t, i) => (
-                      <motion.span 
-                        key={t} 
+                      <motion.span
+                        key={t}
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -116,7 +116,7 @@ const Projects = () => {
                     ))}
                   </div>
                   <a href={project.demo} className="inline-flex items-center gap-3 text-lg font-bold hover:text-primary transition-colors group/link">
-                    View Project 
+                    View Project
                     <ArrowRight size={20} className="transform group-hover/link:translate-x-2 transition-transform" />
                   </a>
                 </motion.div>
