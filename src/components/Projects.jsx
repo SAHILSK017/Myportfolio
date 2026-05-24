@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, Play, X } from 'lucide-react';
 import backtraceImg from '../assets/backtrace.png';
 import avataniImg from '../assets/avatani.png';
-import smartTrafficImg from '../assets/smart trafic.png';
+
+import NeuraldeskImg from '../assets/Neuraldesk.png';
 
 const Projects = () => {
+  const [activeVideo, setActiveVideo] = useState(null);
+
   const projects = [
     {
       title: "BackTrace",
@@ -14,7 +17,8 @@ const Projects = () => {
       tech: ["React", "Node.js", "MongoDB", "Tailwind"],
       github: "https://github.com/SAHILSK017/Backtrace",
       demo: "https://backtracesk.vercel.app/",
-      image: backtraceImg
+      image: backtraceImg,
+      video: "/backtracevideo.mp4"
     },
 
     {
@@ -27,13 +31,13 @@ const Projects = () => {
       image: avataniImg
     },
     {
-      title: "Smart Traffic System",
-      subtitle: "IoT & Logic Platform",
-      description: "Concept for optimizing traffic signals using data-driven logic to reduce urban congestion and improve flow.",
-      tech: ["Python", "Algorithms", "IoT Concepts"],
-      github: "#",
-      demo: "#",
-      image: smartTrafficImg
+      title: "NEURALDESK",
+      subtitle: "AI Powered Smart Note-Taking Workspace",
+      description: "NeuralDesk is an AI-powered smart note-taking and productivity platform designed to help users write, organize, and manage notes more intelligently. The platform integrates Google Gemini AI to generate summaries, action items, and intelligent insights from user content. It features secure JWT-based authentication, persistent task synchronization, debounced auto-save workflows, and AI response caching for optimized performance. Built with the MERN stack and Next.js, the project focuses on scalable backend architecture, responsive UI design, and immersive user experience through cinematic animations and interactive elements.",
+      tech: ["React", "Node.js", "MongoDB", "Tailwind", "JWT", "Next.js", "Google Gemini AI", "Firebase Storage"],
+      github: "https://github.com/SAHILSK017/AI-Notes",
+      demo: "https://ai-notes-seven-iota.vercel.app/",
+      image: NeuraldeskImg
     }
   ];
 
@@ -63,7 +67,10 @@ const Projects = () => {
               className={`flex flex-col gap-10 lg:gap-16 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
             >
               {/* Project Image */}
-              <div className="w-full lg:w-3/5 group relative">
+              <div 
+                className={`w-full lg:w-3/5 group relative ${project.video ? 'cursor-pointer' : ''}`}
+                onClick={() => project.video && setActiveVideo(project.video)}
+              >
                 <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl aspect-[16/10] card-gradient transform transition-transform duration-500 hover:-translate-y-2">
                   <img
                     src={project.image}
@@ -72,7 +79,17 @@ const Projects = () => {
                   />
                   {/* Floating Tech Tags on Image Hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
-                    <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    {project.video && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="p-5 bg-primary/95 hover:bg-primary text-white rounded-full transition-all duration-300 shadow-lg shadow-primary/40 hover:scale-110 transform translate-y-4 group-hover:translate-y-0">
+                          <Play size={32} fill="currentColor" className="ml-1" />
+                        </div>
+                      </div>
+                    )}
+                    <div 
+                      className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <a href={project.github} className="p-4 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-primary transition-colors hover:scale-110">
                         <Github size={24} />
                       </a>
@@ -125,6 +142,35 @@ const Projects = () => {
           ))}
         </div>
       </div>
+
+      {/* Cinematic Modal */}
+      {activeVideo && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 md:p-8"
+          onClick={() => setActiveVideo(null)}
+        >
+          <div 
+            className="relative w-full max-w-5xl aspect-video bg-black rounded-[2rem] overflow-hidden shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button 
+              className="absolute top-4 right-4 z-10 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full transition-all duration-300 hover:scale-110"
+              onClick={() => setActiveVideo(null)}
+            >
+              <X size={20} />
+            </button>
+            
+            {/* Video Element */}
+            <video 
+              src={activeVideo} 
+              autoPlay 
+              controls 
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

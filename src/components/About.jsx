@@ -110,7 +110,7 @@ const About = () => {
               <ShieldCheck size={32} /> AWS
             </div>
             <div className="flex items-center gap-3 text-3xl font-black font-display text-slate-800 dark:text-slate-200">
-               Parul University
+               Generative AI Developer
             </div>
             {/* Duplicated Set for infinite scroll */}
             <div className="flex items-center gap-3 text-3xl font-black font-display text-slate-800 dark:text-slate-200">
@@ -123,7 +123,7 @@ const About = () => {
               <ShieldCheck size={32} /> AWS
             </div>
             <div className="flex items-center gap-3 text-3xl font-black font-display text-slate-800 dark:text-slate-200">
-               Parul University
+               Generative AI Developer
             </div>
           </motion.div>
         </div>
